@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagination</title>
+    <style>
+        .paginator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .paginator span {
+      margin: 0 5px; /* Adjust spacing between elements */
+    }
+
+    .paginator a {
+      text-decoration: none;
+      padding: 5px 10px;
+      border: 1px solid #333;
+      border-radius: 50px;
+      color: #333;
+    }
+
+    .paginator a:hover {
+      background-color: #333;
+      color: white;
+    }
+
+    .paginator .current-page {
+      padding: 5px 8px;
+      border: 1px solid #333;
+      border-radius: 50px;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+
+
+    </style>
+</head>
+<body align="center">
+
+    <div>
+        <h1>User Data With Pagination</h1>
+    </div>
+
+    <div align="center">
+        <table border="1">
+
+            <tr>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>User Age</th>
+                <th>User Gender</th>
+            </tr>
+
+            {% for data in page_obj %}
+            <tr>
+                <th>{{data.u_id}}</th>
+                <th>{{data.u_name}}</th>
+                <th>{{data.u_age}}</th>
+                <th>{{data.u_gender}}</th>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+        <br>
+
+
+        <div class="paginator">
+            <span>
+                {% if page_obj.has_previous %}
+                <a href="?page={{page_obj.previous_page_number}}">PREVIOUS</a>
+                {% endif %}
+
+                <span class="current-page">
+                    {{ page_obj.number }}
+                </span>
+
+                {% if page_obj.has_next %}
+                <a href="?page={{page_obj.next_page_number}}">NEXT</a>
+                {% endif %}
+            </span>
+        </div>
+
+
+    </div>
+
+</body>
+</html>
